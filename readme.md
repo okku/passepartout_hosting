@@ -4,4 +4,5 @@ Run dev
 
 Upload to server
 ---
-update /Users/okku/dev/passepartout_hosting
+- Build prod in passepartout project
+- update /Users/okku/dev/passepartout_hosting
