@@ -1,26 +1,23 @@
 #!/usr/bin/env python
-#
-# Copyright 2007 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-import webapp2
 
+import webapp2
+import requests
+import logging
+
+api_url = "https://heynow2.appspot.com/v1/code/"
 
 class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.write('Hello world!')
+    def webcode(self, webcode):
+        if len(webcode) == 5:
+            url = api_url + webcode + "/"
+            logging.info(url)
+            info = requests.get(url, verify = False).json()
+            if "fbName" in info and "code" in info:
+                redir = 'https://m.me/' + info.get("fbName").encode('ascii','ignore') + '?ref=lc1' + info.get("code").encode('ascii','ignore')
+                logging.info(redir)
+                return self.redirect(redir)
+        return self.redirect('/')
 
 app = webapp2.WSGIApplication([
-    ('/test', MainHandler)
-], debug=True)
+     webapp2.Route(r'/<webcode:\w+>', handler=MainHandler, handler_method='webcode'),
+], debug=False)

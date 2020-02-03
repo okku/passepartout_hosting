@@ -1,5 +1,3 @@
-application: passepartout
-version: 1
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -10,24 +8,16 @@ handlers:
   upload: assets/index.html
   secure: always
 
-- url: /(.*)
+# - url: /(.*)
+#   static_files: assets/\1
+#   upload: assets/(.*)
+
+- url: /(.*\..*)
   static_files: assets/\1
   upload: assets/(.*)
 
-#- url: /.*\.js
-#  static_files: assets/\1
-#  upload: assets/(.*)
-#
-#- url: /.*\.css
-#  static_files: assets/\1
-#  upload: assets/(.*)
-#
-#- url: /favicon\.ico
-#  static_files: favicon.ico
-#  upload: favicon\.ico
-
-#- url: .*
-#  script: main.app
+- url: .*
+  script: main.app
 
 libraries:
 - name: webapp2

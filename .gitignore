@@ -1,2 +1,6 @@
 assets/
 .idea/
+lib/
+*.py[cod]
+.vscode/settings.json
+.vscode/launch.json
