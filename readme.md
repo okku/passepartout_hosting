@@ -11,4 +11,13 @@ pip install -t lib --upgrade -r requirements.txt
 Upload to server
 ---
 - Build prod in passepartout project
+
+    ```bash
+    ng build --output-path ../passepartout_hosting/assets --prod
+    ```
+
 - update /Users/okku/dev/passepartout_hosting
+
+    ```bash
+    ./deploy_prod.sh
+    ```
